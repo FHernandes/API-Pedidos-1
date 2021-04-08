@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "e2925ece-2622-45f5-bc93-996f253ca84e",
+		"name": "MS Pedidos (local)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Origem",
+			"item": [
+				{
+					"name": "Origem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/origem",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"origem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carregar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/origem/carregar",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"origem",
+								"carregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{API_Pedidos}}/origem/adicionar",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"origem",
+								"adicionar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "API_Pedidos",
+			"value": "localhost:5555"
+		}
+	]
+}

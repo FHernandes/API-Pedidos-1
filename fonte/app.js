@@ -21,7 +21,8 @@ app.use((req, res, next) => {
 });
 
 const rotasOrigem = require('./rotas/rotasOrigem')
-//const rotasCategorias = require('./rotas/rotasCategorias')
+const rotasStatus = require('./rotas/rotasStatus')
+const rotasPedidos = require('./rotas/rotasPedidos')
 
 require('dotenv').config({path: '../.env'});
 const bd = process.env.BD;
@@ -29,6 +30,7 @@ const bd = process.env.BD;
 mongoose.connect(bd, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use('/origem', rotasOrigem);
-//app.use('/categorias', rotasCategorias);
+app.use('/status', rotasStatus);
+app.use('/pedidos', rotasPedidos);
 
 module.exports = app;

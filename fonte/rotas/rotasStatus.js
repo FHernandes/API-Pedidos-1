@@ -26,10 +26,10 @@ router.get('/carregar/:id', (req, res) => {
         });
 });
 
-// LISTAR status por id
-router.get('/listar/:id', (req, res) => {
-    const id = req.params.id;
-    Status.find({_id: id})
+// LISTAR status por nome
+router.get('/listar/:nome', (req, res) => {
+    const nome = req.params.nome;
+    Status.find({nome: nome})
         .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);
@@ -51,7 +51,7 @@ router.post('/adicionar', (req, res) => {
         .save()
         .then(result => {
             console.log(result);
-            res.status(201).json(doc);
+            res.status(201).json(result);
         })
         .catch(err => {
             console.log(err);

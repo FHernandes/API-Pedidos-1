@@ -31,13 +31,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_Pedidos}}/origem/carregar",
+							"raw": "{{API_Pedidos}}/origem/carregar/60743aa441e8d1265cc504ca",
 							"host": [
 								"{{API_Pedidos}}"
 							],
 							"path": [
 								"origem",
-								"carregar"
+								"carregar",
+								"60743aa441e8d1265cc504ca"
 							]
 						}
 					},
@@ -56,7 +57,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\r\n    \"nome\": \"Pedido-venda\"\r\n}"
 						},
 						"url": {
 							"raw": "{{API_Pedidos}}/origem/adicionar",
@@ -72,10 +73,232 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/status",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carregar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/status/carregar/60743c45dc0ad11758ceb086",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"status",
+								"carregar",
+								"60743c45dc0ad11758ceb086"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/status/listar/Novo",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"status",
+								"listar",
+								"Novo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Novo\"\r\n}"
+						},
+						"url": {
+							"raw": "{{API_Pedidos}}/status/adicionar",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"status",
+								"adicionar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/pedidos",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Carregar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/pedidos/carregar/1/607440c4e711c525503e1d1f",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"pedidos",
+								"carregar",
+								"1",
+								"607440c4e711c525503e1d1f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/pedidos/listar/1",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"pedidos",
+								"listar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por Pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/pedidos/listarPessoa/1/1",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"pedidos",
+								"listarPessoa",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verificar Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_Pedidos}}/pedidos/verificarStatus",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"pedidos",
+								"verificarStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idProprietario\": \"1\",\r\n    \"idPessoa\": \"1\",\r\n    \"valor\": 20.00,\r\n    \"observacoes\": \"nenhuma\",\r\n    \"origem\": [\r\n        {\r\n            \"_id\": \"60743aa441e8d1265cc504ca\"\r\n        }\r\n    ],\r\n    \"status\": [\r\n        {\r\n            \"_id\": \"60743c45dc0ad11758ceb086\",\r\n            \"dataHoraAcao\": \"10:00\",\r\n            \"dataHoraRegistro\": \"10:00\"\r\n        }\r\n    ],\r\n    \"produtos\": [\r\n        {\r\n            \"id\": \"1\",\r\n            \"nome\": \"XTudo\",\r\n            \"descricao\": \"0\",\r\n            \"valorAplicado\": 20.00,\r\n            \"valorOriginal\": 20.00,\r\n            \"modificacoes\": [\r\n                \r\n            ]\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{API_Pedidos}}/pedidos/adicionar",
+							"host": [
+								"{{API_Pedidos}}"
+							],
+							"path": [
+								"pedidos",
+								"adicionar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"variable": [
 		{
+			"id": "e831bbff-6b7e-46a6-b4dc-cc013730ad30",
 			"key": "API_Pedidos",
 			"value": "localhost:5555"
 		}

@@ -15,8 +15,10 @@ const EsquemaPedido = new mongoose.Schema({
     status: [
         {
             type: mongoose.Schema.Types.ObjectID,
-            ref: 'Status'
-        }
+            ref: 'Status',
+            dataHoraAcao: String,
+            dataHoraRegistro: String
+        },
     ],
     produtos: [
         {

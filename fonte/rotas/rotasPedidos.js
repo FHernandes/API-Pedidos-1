@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Pedido = require('../esquemas/esquemaPedidos');
+const Status = require('../esquemas/esquemaStatus');
 
 // get para /pedidos
 router.get('/', (req, res) => {
@@ -43,7 +44,7 @@ router.get('/listar/:idProprietario', (req, res) => {
 });
 
 // LISTAR pedido por idProprietario e idPessoa
-router.get('/listar/:idProprietario/:idPessoa', (req, res) => {
+router.get('/listarPessoa/:idProprietario/:idPessoa', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const idPessoa = req.params.idPessoa;
     Pedido.find({idProprietario: idProprietario, idPessoa: idPessoa})
@@ -57,6 +58,28 @@ router.get('/listar/:idProprietario/:idPessoa', (req, res) => {
             res.status(500).json({error: err});
         });
 });
+
+// Verificar status?
+router.get('/verificarStatus/:idProprietario/:id', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id;
+    Pedido.findOne({idProprietario: idProprietario, _id: id})
+        .exec()
+        .then(doc => {
+
+            let status;
+
+            status = doc.status;
+
+            console.log("Do banco de dados:", status);
+            res.status(200).json(status);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+});
+
 
 // POST para /pedidos/adicionar
 router.post('/adicionar', (req, res) => {
@@ -74,13 +97,35 @@ router.post('/adicionar', (req, res) => {
         .save()
         .then(result => {
             console.log(result);
-            res.status(201).json(doc);
+            res.status(201).json(result);
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({error: err});
         });
 });
+
+// Alterar status
+router.patch('/alterarStatus', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id; 
+    const alteracoes = {};
+
+    for(const [chave, valor] of Object.entries(req.body)){
+        alteracoes[chave] = valor;
+    }
+
+    Pedido.update({idProprietario: idProprietario, _id: id}, { $set: alteracoes})
+    .exec()
+        .then(doc => {
+            console.log("Do banco de dados:", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
 
 // UPDATE por id_proprietario e id
 router.patch('/alterar/:idProprietario/:id', (req, res) => {

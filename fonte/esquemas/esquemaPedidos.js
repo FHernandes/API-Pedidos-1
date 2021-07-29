@@ -14,8 +14,7 @@ const EsquemaPedido = new mongoose.Schema({
     ],
     status: [
         {
-            type: mongoose.Schema.Types.ObjectID,
-            ref: 'Status',
+            id: String,
             dataHoraAcao: String,
             dataHoraRegistro: String
         },

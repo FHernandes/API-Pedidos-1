@@ -7,6 +7,39 @@ const Status = require('../esquemas/esquemaStatus');
 
 // Funções auxiliares
 
+// uma data em string tem o formato "2021-08-02 15:22:45.123"
+
+function Data1MaiorQueData2(data1, data2){
+
+    if (data1 > data2)
+        return true;
+    else
+        return false;
+}
+
+function ConverteStringParaData(dataString){ 
+
+    let ano = dataString.substring(0, 4);
+
+    let mes = dataString.substring(5, 7);
+
+    let dia = dataString.substring(8, 10);
+
+    let horas = dataString.substring(11, 13);
+
+    let minutos = dataString.substring(14, 16);
+
+    let segundos = dataString.substring(17, 19);
+
+    let milisegundos = dataString.substring(20, 23);
+
+    let data = new Date(ano, mes, dia, horas, minutos, segundos, milisegundos);
+
+    console.log(data);
+
+    return data;
+}
+
 function ConverteDataParaString(data){
 
     let ano = data.getFullYear().toString();
@@ -100,22 +133,40 @@ router.get('/listar/:idProprietario', (req, res) => {
 });
 
 // LISTAR pedido por idProprietario e filtro por data
-/*
-router.get('/listarPorData/:idProprietario', (req, res) => {
+router.get('/listarPedidosNovos/:idProprietario', (req, res) => {
     const idProprietario = req.params.idProprietario;
-    const data = req.params.data;
-    Pedido.find({idProprietario: idProprietario})
+    const data = req.body.data;
+    Pedido.find({idProprietario: idProprietario, status: {$size : {$eq : 1}} })
         .exec()
         .then(doc => {
-            console.log("Do banco de dados:", doc);
-            res.status(200).json(doc);
+
+            let pedidos = doc;
+            let pedidosNovos = [];
+            let dataReferencia = new Date();
+            let dataPedido = new Date();
+
+            dataReferencia = ConverteStringParaData(data);
+            
+            if (pedidos != null){
+
+                for(i = 0; i < pedidos.length; i++){
+                    
+                    dataPedido = ConverteStringParaData(pedidos[i].status[0].dataHoraAcao);
+
+                    if( Data1MaiorQueData2(dataPedido, dataReferencia) )
+                        pedidosNovos.push(pedidos[i]);
+                    
+                }
+            }
+
+            console.log("Do banco de dados:", pedidosNovos);
+            res.status(200).json(pedidosNovos);
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({error: err});
         });
 });
-*/
 
 // LISTAR pedido por idProprietario e idPessoa
 router.get('/listarPessoa/:idProprietario/:idPessoa', (req, res) => {

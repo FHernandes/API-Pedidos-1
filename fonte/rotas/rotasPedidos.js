@@ -215,11 +215,19 @@ router.post('/adicionar', (req, res) => {
 
     let pedidoStatus = [];
 
+    let status = {
+        id: "60743c45dc0ad11758ceb086",
+        dataHoraAcao: req.body.dataPedido,
+        dataHoraRegistro: dataString
+    }
+
+    /*
     const status = new Status({
         id: "60743c45dc0ad11758ceb086",
         dataHoraAcao: req.body.dataPedido,
         dataHoraRegistro: dataString
     });
+    */
 
     pedidoStatus.push(status);
 

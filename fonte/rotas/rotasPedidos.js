@@ -213,11 +213,15 @@ router.post('/adicionar', (req, res) => {
 
     let dataString = ConverteDataParaString(data);
 
+    let pedidoStatus = [];
+
     const status = new Status({
         id: "60743c45dc0ad11758ceb086",
-        dataHoraAcao: req.body.status[0].dataHoraAcao,
+        dataHoraAcao: req.body.dataPedido,
         dataHoraRegistro: dataString
     });
+
+    pedidoStatus.push(status);
 
    const pedido = new Pedido({
         _id: mongoose.Types.ObjectId(),
@@ -226,7 +230,7 @@ router.post('/adicionar', (req, res) => {
         valor: req.body.valor,
         observacoes: req.body.observacoes,
         origem: req.body.origem,
-        status: status,
+        status: pedidoStatus,
         produtos: req.body.produtos,
     });
     pedido

@@ -87,8 +87,6 @@ function ConverteDataParaString(data){
 
     let dataString = ano + "-" + mes + "-" + dia + " " + horas + ":" + minutos + ":" + segundos + "." + milisegundos;
 
-    console.log("DataString:", dataString);
-
     return dataString;
 }
 

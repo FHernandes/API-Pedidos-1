@@ -134,7 +134,7 @@ router.get('/listar/:idProprietario', (req, res) => {
 router.get('/listarPedidosNovos/:idProprietario', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const data = req.body.data;
-    Pedido.find({idProprietario: idProprietario, status: {$size : {$eq : 1}} })
+    Pedido.find({idProprietario: idProprietario, status: {$size : 1} })
         .exec()
         .then(doc => {
 

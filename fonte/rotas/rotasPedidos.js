@@ -131,9 +131,9 @@ router.get('/listar/:idProprietario', (req, res) => {
 });
 
 // LISTAR pedido por idProprietario e filtro por data
-router.get('/listarPedidosNovos/:idProprietario', (req, res) => {
+router.get('/listarPedidosNovos/:idProprietario/:data', (req, res) => {
     const idProprietario = req.params.idProprietario;
-    const data = req.body.data;
+    const data = req.params.data;
     Pedido.find({idProprietario: idProprietario, status: {$size : 1} })
         .exec()
         .then(doc => {

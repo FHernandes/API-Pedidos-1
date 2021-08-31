@@ -295,4 +295,125 @@ router.patch('/alterar/:idProprietario/:id', (req, res) => {
         });
 })
 
+// Confirmar Pedido
+router.patch('/confirmar/:idProprietario/:id/:dataAcao', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id; 
+    const dataHoraAcao = req.params.dataHoraAcao;
+
+    Pedido.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            const dataReg = new Date();
+
+            const statusConfirmado = {
+                id: "612e31bb5b6518dcc96d3421",
+                dataHoraAcao: dataHoraAcao,
+                dataHoraRegistro: ConverteDataParaString(dataReg) 
+            }
+
+            doc.status.push(statusConfirmado);
+
+            await doc.save();
+    
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
+
+// Enviar Pedido
+router.patch('/enviar/:idProprietario/:id/:dataAcao', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id; 
+    const dataHoraAcao = req.params.dataHoraAcao;
+
+    Pedido.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            const dataReg = new Date();
+
+            const statusEnviado = {
+                id: "612e31695b6518dcc96d3420",
+                dataHoraAcao: dataHoraAcao,
+                dataHoraRegistro: ConverteDataParaString(dataReg) 
+            }
+
+            doc.status.push(statusEnviado);
+
+            await doc.save();
+    
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
+
+// Finalizar Pedido
+router.patch('/finalizar/:idProprietario/:id/:dataAcao', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id; 
+    const dataHoraAcao = req.params.dataHoraAcao;
+
+    Pedido.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            const dataReg = new Date();
+
+            const statusFinalizado = {
+                id: "612e31ca5b6518dcc96d3422",
+                dataHoraAcao: dataHoraAcao,
+                dataHoraRegistro: ConverteDataParaString(dataReg) 
+            }
+
+            doc.status.push(statusFinalizado);
+
+            await doc.save();
+    
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
+
+// Cancelar Pedido
+router.patch('/cancelar/:idProprietario/:id/:dataAcao', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id; 
+    const dataHoraAcao = req.params.dataHoraAcao;
+
+    Pedido.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            const dataReg = new Date();
+
+            const statusCancelado = {
+                id: "612e31555b6518dcc96d341f",
+                dataHoraAcao: dataHoraAcao,
+                dataHoraRegistro: ConverteDataParaString(dataReg) 
+            }
+
+            doc.status.push(statusCancelado);
+
+            await doc.save();
+    
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
+
+
 module.exports = router;

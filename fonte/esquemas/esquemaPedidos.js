@@ -4,7 +4,11 @@ const EsquemaPedido = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectID,
     idProprietario: String,
     idPessoa: String,
+    idEndereco: String,
+    idTelefone: String,
+    idDocumento: String,
     valor: Number,
+    taxaEntrega: Number,
     observacoes: String,
     origem: [
         {
@@ -22,6 +26,7 @@ const EsquemaPedido = new mongoose.Schema({
     produtos: [
         {
             id: String,
+            idExterno: String,
             nome: String,
             descricao: String,
             valorAplicado: Number,
@@ -29,10 +34,22 @@ const EsquemaPedido = new mongoose.Schema({
             modificacoes: [
                 {
                     id: String,
+                    idExterno: String,
                     nome: String,
                     valor: Number
                 }
             ]
+        }
+    ],
+    pagamentos: [
+        {
+            idExterno: String,
+            nome: String,
+            codigo: String,
+            bandeira: String,
+            prepago: Boolean,
+            valor: Number,
+            troco: Number
         }
     ]
 });

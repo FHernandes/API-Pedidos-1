@@ -315,10 +315,15 @@ router.patch('/confirmar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 
             doc.status.push(statusConfirmado);
 
-            await doc.save();
-    
-            res.status(200).json(doc);
-        })
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });                        
+            })
         .catch(err => {
             console.log(err);
             res.status(500).json({error: err});
@@ -345,9 +350,14 @@ router.patch('/enviar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 
             doc.status.push(statusEnviado);
 
-            await doc.save();
-    
-            res.status(200).json(doc);
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });                                   
         })
         .catch(err => {
             console.log(err);
@@ -375,9 +385,14 @@ router.patch('/finalizar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 
             doc.status.push(statusFinalizado);
 
-            await doc.save();
-    
-            res.status(200).json(doc);
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });    
         })
         .catch(err => {
             console.log(err);
@@ -405,9 +420,14 @@ router.patch('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 
             doc.status.push(statusCancelado);
 
-            await doc.save();
-    
-            res.status(200).json(doc);
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });    
         })
         .catch(err => {
             console.log(err);

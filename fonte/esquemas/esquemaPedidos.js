@@ -10,6 +10,7 @@ const EsquemaPedido = new mongoose.Schema({
     valor: Number,
     taxaEntrega: Number,
     observacoes: String,
+    detalhes: String,
     origem: [
         {
             type: mongoose.Schema.Types.ObjectID,

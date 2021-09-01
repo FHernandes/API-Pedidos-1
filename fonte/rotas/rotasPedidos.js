@@ -405,6 +405,7 @@ router.post('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const id = req.params.id; 
     const dataHoraAcao = req.params.dataHoraAcao;
+    const detalhesCancelamento = req.body.detalhes;
 
     Pedido.findOne({idProprietario: idProprietario, _id: id})
     .exec()
@@ -418,6 +419,7 @@ router.post('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
                 dataHoraRegistro: ConverteDataParaString(dataReg) 
             }
 
+            doc.detalhes = detalhesCancelamento;
             doc.status.push(statusCancelado);
 
             doc

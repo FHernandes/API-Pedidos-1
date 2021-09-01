@@ -296,7 +296,7 @@ router.patch('/alterar/:idProprietario/:id', (req, res) => {
 })
 
 // Confirmar Pedido
-router.patch('/confirmar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
+router.post('/confirmar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const id = req.params.id; 
     const dataHoraAcao = req.params.dataHoraAcao;
@@ -331,7 +331,7 @@ router.patch('/confirmar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 })
 
 // Enviar Pedido
-router.patch('/enviar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
+router.post('/enviar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const id = req.params.id; 
     const dataHoraAcao = req.params.dataHoraAcao;
@@ -366,7 +366,7 @@ router.patch('/enviar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 })
 
 // Finalizar Pedido
-router.patch('/finalizar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
+router.post('/finalizar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const id = req.params.id; 
     const dataHoraAcao = req.params.dataHoraAcao;
@@ -401,7 +401,7 @@ router.patch('/finalizar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
 })
 
 // Cancelar Pedido
-router.patch('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
+router.post('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const id = req.params.id; 
     const dataHoraAcao = req.params.dataHoraAcao;

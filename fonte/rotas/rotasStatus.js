@@ -26,10 +26,9 @@ router.get('/carregar/:id', (req, res) => {
         });
 });
 
-// LISTAR status por nome
-router.get('/listar/:nome', (req, res) => {
-    const nome = req.params.nome;
-    Status.find({nome: nome})
+// LISTAR status 
+router.get('/listar', (req, res) => {
+    Status.find()
         .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);

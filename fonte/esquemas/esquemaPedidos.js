@@ -3,14 +3,31 @@ mongoose = require('mongoose')
 const EsquemaPedido = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectID,
     idProprietario: String,
-    idPessoa: String,
-    idEndereco: String,
-    idTelefone: String,
-    idDocumento: String,
     valor: Number,
     taxaEntrega: Number,
     observacoes: String,
     detalhes: String,
+    dadosCliente: {
+        idPessoa: String,
+        nome: String, 
+        email: String,
+        endereco: {
+            rua: String,
+            numero: String,
+            descricao: String,
+            complemento: String,
+            referencia: String,
+            bairro: String,
+            cidade: String,
+            estado: String,
+            cep: String
+        },
+        telefone: {
+            tipo: String,
+            ddd: String,
+            numero: String
+        }
+    },
     origem: [
         {
             type: mongoose.Schema.Types.ObjectID,

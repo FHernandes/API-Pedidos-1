@@ -131,6 +131,21 @@ router.get('/listar/:idProprietario', (req, res) => {
 });
 
 // LISTAR pedido por idProprietario e filtro por data
+router.get('/listarPedidos/:idProprietario', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    Pedido.find({idProprietario: idProprietario, status: {$size : 1} })
+        .exec()
+        .then(doc => {
+            console.log("Do banco de dados:", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+});
+
+// LISTAR pedido por idProprietario e filtro por data
 router.get('/listarPedidosNovos/:idProprietario/:data', (req, res) => {
     const idProprietario = req.params.idProprietario;
     const data = req.params.data;
@@ -232,7 +247,7 @@ router.post('/adicionar', (req, res) => {
    const pedido = new Pedido({
         _id: mongoose.Types.ObjectId(),
         idProprietario: req.body.idProprietario,
-        idPessoa: req.body.idPessoa,
+        dadosCliente: req.body.dadosCliente,
         valor: req.body.valor,
         observacoes: req.body.observacoes,
         origem: req.body.origem,

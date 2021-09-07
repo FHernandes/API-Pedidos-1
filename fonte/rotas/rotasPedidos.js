@@ -426,6 +426,16 @@ router.post('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
     .exec()
         .then(doc => {
 
+            // const indiceUltimoStatus = doc.status.length - 1;
+            // const idUltimoStatus = doc.status[indiceUltimoStatus].id;
+
+            // // se pedido foi enviado ou finalizado, não é possível cancelar
+            // if (idUltimoStatus == "6136428ee3949444bb0ccc85")
+            //     res.status(500).json({erro: "Não é possível cancelar um pedido finalizado."})
+
+            // if (idUltimoStatus == "61364273e3949444bb0ccc83")
+            //     res.status(500).json({erro: "Não é possível cancelar um pedido em rota de entrega."})
+
             const dataReg = new Date();
 
             const statusCancelado = {
@@ -435,6 +445,53 @@ router.post('/cancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
             }
 
             doc.detalhes = detalhesCancelamento;
+            doc.status.push(statusCancelado);
+
+            doc
+                .save()
+                .then(result => {
+                    res.status(200).json(result);
+                })
+                .catch(err => {
+                    res.status(500).json({error: err});
+                });    
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+})
+
+// Cancelar Pedido
+router.post('/clienteCancelar/:idProprietario/:id/:dataHoraAcao', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    const id = req.params.id; 
+    const dataHoraAcao = req.params.dataHoraAcao;
+    //const detalhesCancelamento = req.body.detalhes;
+
+    Pedido.findOne({idProprietario: idProprietario, _id: id})
+    .exec()
+        .then(doc => {
+
+            const indiceUltimoStatus = doc.status.length - 1;
+            const idUltimoStatus = doc.status[indiceUltimoStatus].id;
+
+            // se pedido foi enviado ou finalizado, não é possível cancelar
+            if (idUltimoStatus == "6136428ee3949444bb0ccc85")
+                res.status(500).json({erro: "Não é possível cancelar um pedido finalizado."})
+
+            if (idUltimoStatus == "61364273e3949444bb0ccc83")
+                res.status(500).json({erro: "Não é possível cancelar um pedido em rota de entrega."})
+
+            const dataReg = new Date();
+
+            const statusCancelado = {
+                id: "6136cbae8dc5c505c6bd333f",
+                dataHoraAcao: dataHoraAcao,
+                dataHoraRegistro: ConverteDataParaString(dataReg) 
+            }
+
+            //doc.detalhes = detalhesCancelamento;
             doc.status.push(statusCancelado);
 
             doc

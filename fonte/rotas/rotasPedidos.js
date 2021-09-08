@@ -130,10 +130,24 @@ router.get('/listar/:idProprietario', (req, res) => {
         });
 });
 
-// LISTAR pedido por idProprietario e filtro por data
+// LISTAR pedido por idProprietario 
 router.get('/listarPedidos/:idProprietario', (req, res) => {
     const idProprietario = req.params.idProprietario;
     Pedido.find({idProprietario: idProprietario, status: {$size : 1} })
+        .exec()
+        .then(doc => {
+            console.log("Do banco de dados:", doc);
+            res.status(200).json(doc);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({error: err});
+        });
+});
+
+router.get('/listarPedidosCanceladosCliente/:idProprietario', (req, res) => {
+    const idProprietario = req.params.idProprietario;
+    Pedido.find( {$and: [ {idProprietario: idProprietario}, {$or: [ {status: {$size: 2} }, {status: {$size: 3} }] } ] })
         .exec()
         .then(doc => {
             console.log("Do banco de dados:", doc);

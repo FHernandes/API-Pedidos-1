@@ -249,10 +249,13 @@ router.post('/adicionar', (req, res) => {
         idProprietario: req.body.idProprietario,
         dadosCliente: req.body.dadosCliente,
         valor: req.body.valor,
+        taxaEntrega: req.body.taxaEntrega,
         observacoes: req.body.observacoes,
+        detalhes: req.body.detalhes,
         origem: req.body.origem,
         status: pedidoStatus,
         produtos: req.body.produtos,
+        pagamentos: req.body.pagamentos
     });
     pedido
         .save()
